@@ -1,26 +1,534 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ========================================
+   LITURGICAL COLOR SYSTEM & THEME TOKENS
+   ======================================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Liturgical Color Palette */
+  --color-parchment: #F9F8F6;
+  --color-parchment-dark: #1A1814;
+  --color-parchment-dark-surface: #252220;
+  --color-charcoal: #2C3034;
+  --color-charcoal-light: #E8E4DF;
+  --color-gold: #D4AF37;
+  --color-gold-dim: #B8962F;
+  --color-cardinal: #C62D25;
+  --color-cardinal-light: #E8524A;
+
+  /* Font Families — fallback names for @theme, overridden in :root below */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Source Serif 4", "Noto Serif", Georgia, "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+:root {
+  --bg: #F9F8F6;
+  --bg-surface: #FFFFFF;
+  --text-primary: #2C3034;
+  --text-secondary: #5A5F65;
+  --text-muted: #8A8F95;
+  --border: #E8E4DF;
+  --gold-accent: #D4AF37;
+  --cardinal-accent: #C62D25;
+}
+
+.dark {
+  --bg: #1A1814;
+  --bg-surface: #252220;
+  --text-primary: #E8E4DF;
+  --text-secondary: #B0A89E;
+  --text-muted: #7A7268;
+  --border: #3A3530;
+  --gold-accent: #D4AF37;
+  --cardinal-accent: #E8524A;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.85;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--cardinal-accent);
+  line-height: 1.3;
+}
+
+/* ========================================
+   DROP CAP
+   ======================================== */
+
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4.2em;
+  line-height: 0.8;
+  padding-right: 0.12em;
+  padding-top: 0.08em;
+  color: var(--cardinal-accent);
+  font-weight: 700;
+}
+
+/* ========================================
+   ACADEMIC TABLE
+   ======================================== */
+
+.academic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.academic-table thead {
+  border-top: 2px solid var(--gold-accent);
+  border-bottom: 2px solid var(--gold-accent);
+}
+
+.academic-table thead th {
+  font-family: var(--font-display);
+  color: var(--cardinal-accent);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+.academic-table tbody tr {
+  border-bottom: 1px solid color-mix(in srgb, var(--gold-accent) 30%, transparent);
+}
+
+.academic-table tbody tr:last-child {
+  border-bottom: 2px solid var(--gold-accent);
+}
+
+.academic-table tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: top;
+  color: var(--text-primary);
+}
+
+.academic-table tbody td:first-child {
+  font-weight: 600;
+  color: var(--cardinal-accent);
+  white-space: nowrap;
+}
+
+/* ========================================
+   GOLD DIVIDER
+   ======================================== */
+
+.gold-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+  margin: 2.5rem 0;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--gold-accent) 40%, transparent);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-accent);
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+
+::selection {
+  background: color-mix(in srgb, var(--gold-accent) 25%, transparent);
+  color: var(--text-primary);
+}
+
+/* ========================================
+   FOOTNOTE SUPERSCRIPT STYLING
+   ======================================== */
+
+.footnote-ref {
+  color: var(--gold-accent);
+  font-size: 0.72em;
+  vertical-align: super;
+  line-height: 0;
+  font-weight: 600;
+  cursor: default;
+  margin-left: 1px;
+}
+
+/* ========================================
+   BLOCKQUOTE
+   ======================================== */
+
+blockquote {
+  border-left: 3px solid var(--gold-accent);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  background: color-mix(in srgb, var(--gold-accent) 5%, transparent);
+  font-style: italic;
+  color: var(--text-secondary);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ========================================
+   ACADEMIC PARAGRAPH INDENTATION
+   ======================================== */
+
+.academic-paragraph {
+  text-indent: 2em;
+  margin-bottom: 0.75rem;
+}
+
+.academic-paragraph:first-of-type,
+.drop-cap {
+  text-indent: 0;
+}
+
+/* ========================================
+   APA REFERENCE LIST
+   ======================================== */
+
+.apa-reference-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: ref-counter;
+}
+
+.apa-reference-list li {
+  padding-left: 2.5em;
+  text-indent: -2.5em;
+  margin-bottom: 0.85rem;
+  line-height: 1.7;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.apa-reference-list li::before {
+  counter-increment: ref-counter;
+  content: "[" counter(ref-counter) "] ";
+  color: var(--gold-accent);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.apa-reference-list .ref-title {
+  font-style: italic;
+}
+
+.apa-reference-list .ref-url {
+  word-break: break-all;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.apa-reference-list .ref-url:hover {
+  color: var(--cardinal-accent);
+  text-decoration: underline;
+}
+
+/* ========================================
+   INLINE CITATION
+   ======================================== */
+
+.inline-citation {
+  font-size: 0.80em;
+  color: var(--gold-accent);
+  font-weight: 600;
+  cursor: default;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 1px;
+}
+
+/* ========================================
+   ABSTRACT BOX
+   ======================================== */
+
+.abstract-box {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold-accent);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  background: color-mix(in srgb, var(--gold-accent) 3%, var(--bg-surface));
+  border-radius: 0 0 6px 6px;
+}
+
+.abstract-box h3 {
+  font-family: var(--font-display);
+  color: var(--gold-accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+}
+
+.abstract-box p {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+
+/* ========================================
+   ENHANCED BLOCKQUOTE
+   ======================================== */
+
+blockquote.academic-quote {
+  border-left: 3px solid var(--gold-accent);
+  padding: 1.25rem 1.75rem;
+  margin: 2rem 0;
+  background: color-mix(in srgb, var(--gold-accent) 4%, transparent);
+  font-style: italic;
+  color: var(--text-secondary);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+blockquote.academic-quote .quote-source {
+  display: block;
+  margin-top: 0.75rem;
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+blockquote.academic-quote .quote-source::before {
+  content: "— ";
+}
+
+/* ========================================
+   KEYWORD TAGS 
+   ======================================== */
+
+.keyword-tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  margin: 0.15rem 0.25rem;
+  font-size: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--gold-accent) 40%, transparent);
+  color: var(--text-secondary);
+  border-radius: 3px;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+/* ========================================
+   SECTION NUMBER
+   ======================================== */
+
+.section-number {
+  color: var(--gold-accent);
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+/* ========================================
+   RESPONSIVE — TABLET (max-width: 768px)
+   ======================================== */
+
+@media (max-width: 768px) {
+  .drop-cap::first-letter {
+    font-size: 3.2em;
+  }
+
+  .academic-table {
+    font-size: 0.78rem;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .academic-table thead th,
+  .academic-table tbody td {
+    padding: 0.5rem 0.65rem;
+  }
+
+  .academic-table tbody td:first-child {
+    white-space: normal;
+  }
+
+  .abstract-box {
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .abstract-box p {
+    font-size: 0.85rem;
+  }
+
+  blockquote.academic-quote {
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  .apa-reference-list li {
+    padding-left: 2em;
+    text-indent: -2em;
+    font-size: 0.82rem;
+  }
+
+  .keyword-tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVE — MOBILE (max-width: 480px)
+   ======================================== */
+
+@media (max-width: 480px) {
+  body {
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  .drop-cap::first-letter {
+    font-size: 2.8em;
+    margin-right: 0.06em;
+  }
+
+  .academic-table {
+    font-size: 0.72rem;
+  }
+
+  .academic-table thead th,
+  .academic-table tbody td {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .gold-divider {
+    margin: 1.5rem 0;
+  }
+
+  .abstract-box {
+    padding: 0.85rem 1rem;
+    margin: 1rem 0;
+  }
+
+  .abstract-box h3 {
+    font-size: 0.75rem;
+  }
+
+  .abstract-box p {
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  blockquote,
+  blockquote.academic-quote {
+    padding: 0.85rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+
+  .apa-reference-list li {
+    padding-left: 1.5em;
+    text-indent: -1.5em;
+    font-size: 0.78rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+  }
+
+  .keyword-tag {
+    font-size: 0.65rem;
+    padding: 0.12rem 0.4rem;
+    margin: 0.1rem 0.15rem;
+  }
+
+  .footnote-ref,
+  .inline-citation {
+    font-size: 0.65em;
+  }
+}
+
+/* ========================================
+   TOUCH-FRIENDLY TARGETS
+   ======================================== */
+
+@media (pointer: coarse) {
+
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .apa-reference-list a {
+    min-height: auto;
+    min-width: auto;
+    padding: 0.25rem 0;
+    display: inline;
+  }
+}
+
+/* ========================================
+   iOS SAFE AREAS
+   ======================================== */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
 }
