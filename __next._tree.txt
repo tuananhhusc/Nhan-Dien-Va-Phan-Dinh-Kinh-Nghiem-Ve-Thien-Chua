@@ -5,4 +5,4 @@
 :HL["/Nhan-Dien-Va-Phan-Dinh-Kinh-Nghiem-Ve-Thien-Chua/_next/static/media/68d403cf9f2c68c5-s.p.f9f15f61.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Nhan-Dien-Va-Phan-Dinh-Kinh-Nghiem-Ve-Thien-Chua/_next/static/media/753b6407f468151f-s.p.504826d2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Nhan-Dien-Va-Phan-Dinh-Kinh-Nghiem-Ve-Thien-Chua/_next/static/media/b4e85636e2ca4056-s.p.9ecc21d7.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"buildId":"q3CJXr8xvQAufpF_jNUsO","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"XXPg2u0GgWpt-Tc8UKf4t","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
